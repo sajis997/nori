@@ -30,13 +30,12 @@ NORI_NAMESPACE_BEGIN
 /**
  * \brief Acceleration data structure for ray intersection queries
  *
- * The current implementation falls back to a brute force loop
- * through the geometry.
+ * The current implementation is based on Bounding Volume Hierarchy
  */
 class Accel {
 public:
 
-    Accel(uint32_t primPerNode = 8,
+    Accel(uint32_t primPerNode = 4,
           SplitMethod split = SplitMethod::SPLIT_MIDDLE)
         : m_splitMethod(split),
           m_maxPrimitivesPerNode(primPerNode)
@@ -104,15 +103,11 @@ private:
     Mesh         *m_mesh = nullptr; ///< Mesh (only a single one for now)
     BoundingBox3f m_bbox;           ///< Bounding box of the entire scene
 
-    SplitMethod m_splitMethod;
+    SplitMethod m_splitMethod;      ///< method to devide the bounding box
 
     uint32_t m_maxPrimitivesPerNode;
     std::vector<BvhPrimitiveInfo*> m_primitives;
     std::vector<BvhNode*> m_nodes;
-
-
-
-
 
 };
 

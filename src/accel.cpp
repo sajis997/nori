@@ -170,6 +170,9 @@ uint32_t Accel::buildRecursive(uint32_t left_index,
                 break;
         }
 
+        assert(std::abs(static_cast<uint32_t>(split_index) - static_cast<uint32_t>(left_index)) > 0);
+        assert(std::abs(static_cast<uint32_t>(right_index) - static_cast<uint32_t>(split_index)) > 0);
+
         static std::stack<uint32_t> parentStack;
 
         parentStack.push(depth);
